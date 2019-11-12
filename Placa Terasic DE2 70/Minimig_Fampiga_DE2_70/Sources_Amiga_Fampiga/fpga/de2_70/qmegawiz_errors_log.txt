@@ -1,0 +1,10 @@
+
+
+C:/DE2-70 Master/Amiga/Board/de2/PLL.vhd
+
+Feb 05 12AM:12:19>: Error in CNX file format.
+
+Error messages are listed in file
+C:/DE2-70 Master/Amiga/Board/de2/PLL.cnxerr.
+
+Can't create the custom megafunction variation file(s)

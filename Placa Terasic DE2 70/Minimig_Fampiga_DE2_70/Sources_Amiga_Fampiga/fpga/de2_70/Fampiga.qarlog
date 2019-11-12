@@ -1,0 +1,67 @@
+Quartus II Archive log --	/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/fpga/de2_70/Fampiga.qarlog
+
+Archive:	/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/fpga/de2_70/Fampiga.qar
+Date:		Tue Aug 27 22:31:37 2019
+Quartus II 32-bit		13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/A_CODEC2.V
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/Constraints.sdc
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/I2C_AV_Config.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/I2C_Controller.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/PLL.cmp
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/PLL.ppf
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/PLL.qip
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/PLL.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/audio_shifter.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/audio_top.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Board/de2/minimig_de2_top.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/C3BoardRTL/poweronreset.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/CacheBlockRAM.cmp
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/CacheBlockRAM.qip
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/CacheBlockRAM.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/CacheBlockRAM_bb.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/Cache_DataRAM.qip
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/Cache_DataRAM.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/Cache_DataRAM_bb.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/JBBoot.qip
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/JBBoot.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/CycloneIII_Generated/JBBoot_bb.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/Firmware/OSDBoot_68K/osdload_ROM.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/ActionReplay3.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Agnus.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Amber.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Audio.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Beamcounter.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Bitplanes.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Blitter.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/BootRom.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/CIA8520.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Clock.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Copper.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Debounce.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Denise.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Fampiga.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Floppy.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Gary.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Gayle.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Minimig1.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/PS2Keyboard.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Paula.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Sprites.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/TG68K.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/TG68K_ALU.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/TG68K_Pack.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/TG68KdotC_Kernel.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/TwoWayCache.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/Userio.v
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/cfide.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/RTL/sdram.vhd
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/fpga/de2_70/Fampiga.qpf
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/fpga/de2_70/Fampiga.qsf
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/fpga/de2_70/Fampiga_assignment_defaults.qdf
+/run/media/root/0293625c-057e-42fb-a445-6236b4aae9f1/home/jaime/FPGA/Master-DE2-70/Amiga/fpga/de2_70/incremental_db/compiled_partitions/Fampiga.db_info
+	======= Total: 56 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

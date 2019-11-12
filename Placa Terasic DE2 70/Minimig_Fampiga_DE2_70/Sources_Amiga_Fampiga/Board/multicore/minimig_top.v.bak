@@ -1,0 +1,424 @@
+//to not automatic create signals
+`default_nettype none
+
+module minimig_top (
+// Clocks
+	input wire	clock_50_i,
+
+	// Buttons
+	input wire [4:1]	btn_n_i,
+
+	// SRAMs (AS7C34096)
+	output wire	[18:0]sram_addr_o  = 18'b0000000000000000000,
+	inout wire	[7:0]sram_data_io	= 8'bzzzzzzzz,
+	output wire	sram_we_n_o		= 1'b1,
+	output wire	sram_oe_n_o		= 1'b1,
+		
+	// SDRAM	(H57V256)
+	output wire	[12:0]sdram_ad_o,
+	inout wire	[15:0]sdram_da_io,
+	output wire	[1:0]sdram_ba_o,
+	output wire	[1:0]sdram_dqm_o,
+	output wire	sdram_ras_o,
+	output wire	sdram_cas_o,
+	output wire	sdram_cke_o,
+	output wire	sdram_clk_o,
+	output wire	sdram_cs_o,
+	output wire	sdram_we_o,
+
+	// PS2
+	inout wire	ps2_clk_io			= 1'bz,
+	inout wire	ps2_data_io			= 1'bz,
+	inout wire	ps2_mouse_clk_io  	= 1'bz,
+	inout wire	ps2_mouse_data_io 	= 1'bz,
+
+	// SD Card
+	output wire	sd_cs_n_o			= 1'b1,
+	output wire	sd_sclk_o			= 1'b0,
+	output wire	sd_mosi_o			= 1'b0,
+	input wire	sd_miso_i,
+
+	// Joysticks
+	input wire	joy1_up_i,
+	input wire	joy1_down_i,
+	input wire	joy1_left_i,
+	input wire	joy1_right_i,
+	input wire	joy1_p6_i,
+	input wire	joy1_p9_i,
+	input wire	joy2_up_i,
+	input wire	joy2_down_i,
+	input wire	joy2_left_i,
+	input wire	joy2_right_i,
+	input wire	joy2_p6_i,
+	input wire	joy2_p9_i,
+	output wire	joyX_p7_o			= 1'b1,
+
+	// Audio
+	output wire	dac_l_o				= 1'b0,
+	output wire	dac_r_o				= 1'b0,
+	input wire	ear_i,
+	output wire	mic_o				= 1'b0,
+
+		// VGA
+	output wire	[4:0]vga_r_o,
+	output wire	[4:0]vga_g_o,
+	output wire	[4:0]vga_b_o,
+	output wire	vga_hsync_n_o,
+	output wire	vga_vsync_n_o,
+
+		// HDMI
+	output wire	[7:0]tmds_o				= 8'b00000000,
+
+		//STM32
+	input wire	stm_tx_i, //stm TX pin, so, is IN on the slave
+	output wire	stm_rx_o, //stm RX pin, so, is OUT on the slave
+	output wire	stm_rst_o			= 1'b0, //'0' to hold the microcontroller reset line, to free the SD card
+		
+	inout wire	stm_b8_io,
+	inout wire	stm_b9_io,
+	inout wire	stm_b12_io,
+	inout wire	stm_b13_io,
+	inout wire	stm_b14_io,
+	inout wire	stm_b15_io,
+	inout wire	stm_a15_io
+);
+
+
+
+////////////////////////////////////////
+// internal signals                   //
+////////////////////////////////////////
+
+// clock
+wire           clk_114;
+wire           clk_28;
+wire           pll_locked;
+wire           clk_7;
+wire           c1;
+wire           c3;
+wire           cck;
+wire [ 10-1:0] eclk;
+wire           clk_50;
+
+// reset
+wire           pll_rst;
+wire           sdctl_rst;
+wire           rst_50;
+wire           rst_minimig;
+
+// ctrl
+wire           rom_status;
+wire           ram_status;
+wire           reg_status;
+
+// tg68
+wire           tg68_rst;
+wire [ 16-1:0] tg68_dat_in;
+wire [ 16-1:0] tg68_dat_out;
+wire [ 32-1:0] tg68_adr;
+wire [  3-1:0] tg68_IPL;
+wire           tg68_dtack;
+wire           tg68_as;
+wire           tg68_uds;
+wire           tg68_lds;
+wire           tg68_rw;
+wire           tg68_ena7RD;
+wire           tg68_ena7WR;
+wire           tg68_enaWR;
+wire [ 16-1:0] tg68_cout;
+wire           tg68_cpuena;
+wire [  2-1:0] cpu_config;
+wire [  6-1:0] memcfg;
+wire [ 32-1:0] tg68_cad;
+wire [  6-1:0] tg68_cpustate;
+wire           tg68_cdma;
+wire           tg68_clds;
+wire           tg68_cuds;
+
+// minimig
+wire [ 16-1:0] ram_data;      // sram data bus
+wire [ 16-1:0] ramdata_in;    // sram data bus in
+wire [ 22-1:1] ram_address;   // sram address bus
+wire           _ram_bhe;      // sram upper byte select
+wire           _ram_ble;      // sram lower byte select
+wire           _ram_we;       // sram write enable
+wire           _ram_oe;       // sram output enable
+wire           _15khz;        // scandoubler disable
+wire           joy_emu_en;    // joystick emulation enable
+wire           sdo;           // SPI data output
+wire [ 15-1:0] ldata;         // left DAC data
+wire [ 15-1:0] rdata;         // right DAC data
+wire [15:0]    audio_left;
+wire [15:0]    audio_right;
+wire           floppy_fwr;
+wire           floppy_frd;
+wire           hd_fwr;
+wire           hd_frd;
+
+// sdram
+wire           reset_out;
+wire [  4-1:0] sdram_cs;
+wire [  2-1:0] sdram_dqm;
+wire [  2-1:0] sdram_ba;
+
+// audio
+wire           audio_lr_switch;
+wire           audio_lr_mix;
+
+// ctrl
+wire [ 16-1:0] SRAM_DAT_W;
+wire [ 16-1:0] SRAM_DAT_R;
+wire [  8-1:0] FL_DAT_W;
+wire [  8-1:0] FL_DAT_R;
+wire [  4-1:0] SPI_CS_N;
+wire           SPI_DI;
+wire           rst_ext;
+wire           boot_sel;
+wire [  4-1:0] ctrl_cfg;
+wire [  4-1:0] ctrl_status;
+
+// indicators
+wire [  8-1:0] track;
+
+////////////////////////////////////////
+// toplevel assignments               //
+////////////////////////////////////////
+
+// PS/2 keyboard
+wire PS2K_DAT_IN=ps2_data_io;
+wire PS2K_DAT_OUT;
+assign ps2_data_io = (PS2K_DAT_OUT == 1'b0) ? 1'b0 : 1'bz;
+wire PS2K_CLK_IN=ps2_clk_io;
+wire PS2K_CLK_OUT;
+assign ps2_clk_io = (PS2K_CLK_OUT == 1'b0) ? 1'b0 : 1'bz;
+
+// PS/2 Mouse
+wire PS2M_DAT_IN=ps2_mouse_data_io;
+wire PS2M_DAT_OUT;
+assign ps2_mouse_data_io = (PS2M_DAT_OUT == 1'b0) ? 1'b0 : 1'bz;
+wire PS2M_CLK_IN=ps2_mouse_clk_io;
+wire PS2M_CLK_OUT;
+assign ps2_mouse_clk_io = (PS2M_CLK_OUT == 1'b0) ? 1'b0 : 1'bz;
+
+
+assign stm_rst_o			= 1'b0;
+assign sram_we_n_o		= 1'b1;
+assign sram_oe_n_o		= 1'b1;
+	
+// ctrl
+//assign SPI_DI           = !SPI_CS_N[0] ? SD_DAT : sdo;
+
+
+// reset
+assign pll_rst          = !btn_n_i[1];
+assign sdctl_rst        = pll_locked & btn_n_i[1];
+
+wire [7:0] vga_red;
+wire [7:0] vga_green;
+wire [7:0] vga_blue;
+
+// VGA wiring
+assign vga_r_o = {vga_red[7:4], vga_red[4]};
+assign vga_g_o = {vga_green[7:4], vga_green[4]};
+assign vga_b_o = {vga_blue[7:4], vga_blue[4]};
+ 
+
+//// generated clocks ////
+
+PLL mypll
+(
+	.inclk0(clock_50_i),
+	.c0(clk_114),
+	.c1(sdram_clk_o),
+	.c2(clk_28),
+	.locked(pll_locked)
+);
+
+
+// 7MHz
+reg [2-1:0] clk7_cnt;
+reg         clk7_en_reg;
+always @ (posedge clk_28, negedge pll_locked) begin
+  if (!pll_locked) begin
+    clk7_cnt <= 2'b10;
+    clk7_en_reg <= #1 1'b1;
+  end else begin
+    clk7_cnt <= clk7_cnt + 2'b01;
+    clk7_en_reg <= #1 ~|clk7_cnt;
+  end
+end
+
+assign clk_7 = clk7_cnt[1];
+//assign clk7_en = clk7_en_reg;
+
+
+
+
+
+defparam myfampiga.sdram_rows = 13;
+defparam myfampiga.sdram_cols = 9;
+
+Fampiga myfampiga
+(
+		.clk(clk_114),
+		.clk7m(clk_7),
+		.clk28m(clk_28),
+		.reset_n(btn_n_i[1]),
+		.powerled_out(),//LEDR[1:0]),
+		.diskled_out(),//LEDG[0]),
+		.oddled_out(),//LEDG[1]),
+	
+		// SDRAM.  A separate shifted clock is provided by the toplevel
+		.sdr_addr(sdram_ad_o),
+		.sdr_data(sdram_da_io),
+		.sdr_ba({sdram_ba_o[1],sdram_ba_o[0]}),
+		.sdr_cke(sdram_cke_o),
+		.sdr_dqm({sdram_dqm_o[1],sdram_dqm_o[0]}),
+		.sdr_cs(sdram_cs_o),
+		.sdr_we(sdram_we_o),
+		.sdr_cas(sdram_cas_o),
+		.sdr_ras(sdram_ras_o),
+
+		// VGA
+		.vga_r(vga_red),
+		.vga_g(vga_green),
+		.vga_b(vga_blue),
+
+		.vga_hsync(vga_hsync_n_s),
+		.vga_vsync(vga_vsync_n_o),
+
+		.vga_scandbl(1'b1), //btn_n_i[2]),
+		
+		// PS/2 keyboard
+		.ps2k_clk_in(PS2K_CLK_IN),
+		.ps2k_dat_in(PS2K_DAT_IN),
+		.ps2k_clk_out(PS2K_CLK_OUT),
+		.ps2k_dat_out(PS2K_DAT_OUT),
+		
+		// PS/2 mouse
+		.ps2m_clk_in(PS2M_CLK_IN),
+		.ps2m_dat_in(PS2M_DAT_IN),
+		.ps2m_clk_out(PS2M_CLK_OUT),
+		.ps2m_dat_out(PS2M_DAT_OUT),
+		
+		// SD card
+		.sd_cs(sd_cs_n_o),
+		.sd_miso(sd_miso_i),
+		.sd_mosi(sd_mosi_o),
+		.sd_clk(sd_sclk_o),
+		.sd_ack(1'b1),
+		
+		// Audio
+		.aud_l(dac_l_o),				// audio bitstream left
+		.aud_r(dac_r_o),				// audio bitstream right
+		.aud16b_l(audio_left),
+		.aud16b_r(audio_right),
+		
+		// RS232
+		.rs232_rxd(stm_rx_o),
+		.rs232_txd(stm_rx_o),
+
+		// Joystick [fire2,fire,up,down,left,right] 
+		//.joy1_n({1'b1,joy1_p9_i, joy1_p6_i, joy1_up_i, joy1_down_i, joy1_left_i, joy1_right_i}), // (default mouse port)
+		//.joy2_n({1'b1,joy2_p9_i, joy2_p6_i, joy2_up_i, joy2_down_i, joy2_left_i, joy2_right_i}), // (default joystick port)
+		.joy1_n(joystick_0), // (default mouse port)
+		.joy2_n(joystick_1), // (default joystick port)
+		.joy3_n(7'b1111111),
+		.joy4_n(7'b1111111)
+	);
+	
+	wire vga_hsync_n_s;
+	assign vga_hsync_n_o = vga_hsync_n_s;
+	
+	
+		//--- Joystick read with sega 6 button support----------------------
+
+	
+	wire [7:0] joystick_0;
+	wire [7:0] joystick_1;
+	assign joystick_0 = {1'b1, joy1_s[7] && joy1_s[5], joy1_s[6] && joy1_s[4], joy1_s[0], joy1_s[1], joy1_s[2], joy1_s[3] };
+	assign joystick_1 = {1'b1, joy2_s[7] && joy2_s[5], joy2_s[6] && joy2_s[4], joy2_s[0], joy2_s[1], joy2_s[2], joy2_s[3] };
+
+	reg [11:0]joy1_s; 	
+	reg [11:0]joy2_s; 
+	reg joyP7_s;
+
+	reg [7:0]state_v = 8'd0;
+	reg j1_sixbutton_v = 1'b0;
+	reg j2_sixbutton_v = 1'b0;
+	
+	always @(negedge vga_hsync_n_s) 
+	begin
+		
+
+			state_v <= state_v + 1;
+
+			
+			case (state_v)			//-- joy_s format MXYZ SACB RLDU
+				8'd0:  
+					joyP7_s <=  1'b0;
+					
+				8'd1:
+					joyP7_s <=  1'b1;
+
+				8'd2:
+					begin
+						joy1_s[3:0] <= {joy1_right_i, joy1_left_i, joy1_down_i, joy1_up_i}; //-- R, L, D, U
+						joy2_s[3:0] <= {joy2_right_i, joy2_left_i, joy2_down_i, joy2_up_i}; //-- R, L, D, U
+						joy1_s[5:4] <= {joy1_p9_i, joy1_p6_i}; //-- C, B
+						joy2_s[5:4] <= {joy2_p9_i, joy2_p6_i}; //-- C, B					
+						joyP7_s <= 1'b0;
+						j1_sixbutton_v <= 1'b0; //-- Assume it's not a six-button controller
+						j2_sixbutton_v <= 1'b0; //-- Assume it's not a six-button controller
+					end
+					
+				8'd3:
+					begin
+						joy1_s[7:6] <= { joy1_p9_i , joy1_p6_i }; //-- Start, A
+						joy2_s[7:6] <= { joy2_p9_i , joy2_p6_i }; //-- Start, A
+						joyP7_s <= 1'b1;
+					end
+					
+				8'd4:  
+					joyP7_s <= 1'b0;
+
+				8'd5:
+					begin
+						if (joy1_right_i == 1'b0 && joy1_left_i == 1'b0 && joy1_down_i == 1'b0 && joy1_up_i == 1'b0 )
+							j1_sixbutton_v <= 1'b1; // --it's a six button
+						
+						
+						if (joy2_right_i == 1'b0 && joy2_left_i == 1'b0 && joy2_down_i == 1'b0 && joy2_up_i == 1'b0 )
+							j2_sixbutton_v <= 1'b1; // --it's a six button
+						
+						
+						joyP7_s <= 1'b1;
+					end
+					
+				8'd6:
+					begin
+						if (j1_sixbutton_v == 1'b1)
+							joy1_s[11:8] <= { joy1_right_i, joy1_left_i, joy1_down_i, joy1_up_i }; //-- Mode, X, Y e Z
+						
+						
+						if (j2_sixbutton_v == 1'b1)
+							joy2_s[11:8] <= { joy2_right_i, joy2_left_i, joy2_down_i, joy2_up_i }; //-- Mode, X, Y e Z
+						
+						
+						joyP7_s <= 1'b0;
+					end 
+					
+				default:
+					joyP7_s <= 1'b1;
+					
+			endcase
+
+	end
+	
+	assign joyX_p7_o = joyP7_s;
+	//---------------------------
+	
+
+
+endmodule
+

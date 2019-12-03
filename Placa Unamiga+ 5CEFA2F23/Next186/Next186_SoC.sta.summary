@@ -1,0 +1,117 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1100mV 100C Model Setup 'CLOCK_50'
+Slack : 2.277
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Setup 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 4.210
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Hold 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.394
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Hold 'CLOCK_50'
+Slack : 0.421
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 8.597
+TNS   : 0.000
+
+Type  : Slow 1100mV 100C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.801
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Setup 'CLOCK_50'
+Slack : 2.004
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Setup 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 4.137
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Hold 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.399
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Hold 'CLOCK_50'
+Slack : 0.437
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 8.558
+TNS   : 0.000
+
+Type  : Slow 1100mV -40C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.817
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Setup 'CLOCK_50'
+Slack : 11.134
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Setup 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 11.448
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Hold 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.178
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Hold 'CLOCK_50'
+Slack : 0.179
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.483
+TNS   : 0.000
+
+Type  : Fast 1100mV 100C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 8.884
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Setup 'CLOCK_50'
+Slack : 12.261
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Setup 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 12.769
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Hold 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.165
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Hold 'CLOCK_50'
+Slack : 0.166
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.413
+TNS   : 0.000
+
+Type  : Fast 1100mV -40C Model Minimum Pulse Width 'sys_inst|dcm_system|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 8.889
+TNS   : 0.000
+
+------------------------------------------------------------

@@ -1,0 +1,21 @@
+Fitter Status : Successful - Tue Dec 03 23:51:41 2019
+Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+Revision Name : Next186_SoC
+Top-level Entity Name : Next186_SoC
+Family : Cyclone V
+Device : 5CEFA2F23I7
+Timing Models : Final
+Logic utilization (in ALMs) : 5,820 / 9,430 ( 62 % )
+Total registers : 5301
+Total pins : 76 / 224 ( 34 % )
+Total virtual pins : 0
+Total block memory bits : 512,202 / 1,802,240 ( 28 % )
+Total DSP Blocks : 5 / 25 ( 20 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI PMA RX ATT Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total HSSI PMA TX ATT Serializers : 0
+Total PLLs : 1 / 4 ( 25 % )
+Total DLLs : 0 / 4 ( 0 % )
